@@ -6,7 +6,7 @@ const { spawn } = require('child_process');
 let botProcess;
 
 async function onBot() {
-    botProcess = spawn('node', ['main.js'], {
+    botProcess = spawn('node', ['JUBAYER.js'], {
         cwd: __dirname,
         stdio: 'inherit',
         shell: true
