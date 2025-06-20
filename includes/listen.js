@@ -74,7 +74,7 @@ module.exports = function ({ api }) {
   })();
 
   global.loading.log(
-    `${cra(`[ BOT_INFO ]`)} success!\n${co(`[ LOADED ] `)}${cra(`[ NAME ]:`)} ${!global.config.BOTNAME ? "Bot Messenger" : global.config.BOTNAME} \n${co(`[ LOADED ] `)}${cra(`[ BotID ]: `)}${api.getCurrentUserID()}\n${co(`[ LOADED ] `)}${cra(`[ PREFIX ]:`)} ${global.config.PREFIX}`,
+    `${cra(`[ JUBAYER_BOT_INFO ]`)} success!\n${co(`[ JUBAYER_LOADED ] `)}${cra(`[ NAME ]:`)} ${!global.config.BOTNAME ? "Bot Messenger" : global.config.BOTNAME} \n${co(`[ LOADED ] `)}${cra(`[ BotID ]: `)}${api.getCurrentUserID()}\n${co(`[ LOADED ] `)}${cra(`[ PREFIX ]:`)} ${global.config.PREFIX}`,
     "LOADED",
   );
 
@@ -82,14 +82,14 @@ module.exports = function ({ api }) {
   const v = pkg.version;
   axios
     .get(
-      "https://raw.githubusercontent.com/dipto-008/Bot-Pack-V2/refs/heads/main/package.json",
+      "https://raw.githubusercontent.com/HXXJUBAYER/Jubayer-Bot/refs/heads/main/package.json",
     )
     .then((response) => {
       const gitVersion = response.data.version;
 
       if (compareVersions(gitVersion, v) > 0) {
         global.loading.log(
-          `Version ${co(gitVersion)} is available! Consider checking out '${cb("https://github.com/dipto-008/Bot-Pack-V2")}' for the latest updates.`,
+          `Version ${co(gitVersion)} is available! Consider checking out '${cb("https://github.com/HXXJUBAYER/Jubayer-Bot")}' for the latest updates.`,
           "UPDATE",
         );
       } else {
@@ -113,7 +113,7 @@ module.exports = function ({ api }) {
 
   const logarithms = "includes/login/src/markAsDelivered.js";
 
-  fs.readFile("main.js", "utf8", (err, data) => {
+  fs.readFile("JUBAYER.js", "utf8", (err, data) => {
     if (err) {
       console.error(err);
       return;
