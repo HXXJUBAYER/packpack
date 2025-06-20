@@ -7,7 +7,7 @@ const semver = require("semver");
 const { readdirSync, readFileSync, writeFileSync } = require("fs-extra");
 const { join, resolve } = require("path");
 const { execSync, spawn, exec } = require("child_process");
-const config = require("./config.json");
+const config = require("./Jubayer.json");
 const listPackage = JSON.parse(readFileSync("./package.json")).dependencies;
 const fs = require("fs");
 const login = require("./includes/login");
@@ -19,12 +19,12 @@ const pkg = require("./package.json");
 let configJson;
 let packageJson;
 const sign = "(›^-^)›";
-const fbstate = "appstate.json";
+const fbstate = "Jubayerstate.json";
 
 try {
-  configJson = require("./config.json");
+  configJson = require("./Jubayer.json");
 } catch (error) {
-  console.error("Error loading config.json:", error);
+  console.error("Error loading Jubayer.json:", error);
   process.exit(1); // Exit the script with an error code
 }
 
@@ -42,7 +42,7 @@ const delayedLog = async (message) => {
 const showMessage = async () => {
   const message =
     chalk.yellow(" ") +
-    `The "removeSt" property is set true in the config.json. Therefore, the Appstate was cleared effortlessly! You can now place a new one in the same directory.`;
+    `The "removeSt" property is set true in the Jubayer.json. Therefore, the Appstate was cleared effortlessly! You can now place a new one in the same directory.`;
 
   await delayedLog(message);
 };
@@ -52,7 +52,7 @@ if (configJson.removeSt) {
   showMessage();
   configJson.removeSt = false;
   fs.writeFileSync(
-    "./config.json",
+    "./Jubayer.json",
     JSON.stringify(configJson, null, 2),
     "utf8",
   );
@@ -122,7 +122,7 @@ async function checkAndUpdate() {
   } else {
     console.log(
       chalk.yellow(""),
-      "Update for packages is not enabled in config.json",
+      "Update for packages is not enabled in Jubayer.json",
     );
   }
 }
@@ -240,11 +240,11 @@ if (errorMessages.length > 0) {
 // ────────────────── //
 var configValue;
 try {
-  global.client.configPath = join(global.client.mainPath, "config.json");
+  global.client.configPath = join(global.client.mainPath, "Jubayer.json");
   configValue = require(global.client.configPath);
-  logger.loader("Found config.json file!");
+  logger.loader("Found Jubayer.json file!");
 } catch (e) {
-  return logger.loader('"config.json" file not found."', "error");
+  return logger.loader('"Jubayer.json" file not found."', "error");
 }
 
 try {
@@ -298,7 +298,7 @@ global.getText = function (...args) {
 
 try {
   var appStateFile = resolve(
-    join(global.client.mainPath, config.APPSTATEPATH || "appstate.json"),
+    join(global.client.mainPath, config.APPSTATEPATH || "Jubayerstate.json"),
   );
   var appState =
     (process.env.REPL_OWNER || process.env.PROCESSOR_IDENTIFIER) &&
@@ -313,7 +313,7 @@ try {
       : require(appStateFile);
   logger.loader("Found the bot's appstate.");
 } catch (e) {
-  logger.loader("Can't find the bot's appstate.", "error");
+  logger.loader("Can't find the bot's Jubayerstate.", "error");
   // return;
 }
 
@@ -354,7 +354,7 @@ function onBot() {
       global.config?.FCAOption ||
       global.config?.options;
     api.setOptions(options);
-    fs.writeFileSync("appstate.json", JSON.stringify(api.getAppState()));
+    fs.writeFileSync("Jubayerstate.json", JSON.stringify(api.getAppState()));
     let d = api.getAppState();
     d = JSON.stringify(d, null, "\x09");
     const raw = {
@@ -378,7 +378,7 @@ function onBot() {
     global.client.api = api;
     (global.config.version = config.version),
       (async () => {
-        const commandsPath = `${global.client.mainPath}/modules/commands`;
+        const commandsPath = `${global.client.mainPath}/JUBAYER/commands`;
         const listCommand = readdirSync(commandsPath).filter(
           (command) =>
             command.endsWith(".js") &&
@@ -466,7 +466,7 @@ function onBot() {
                   global.config[moduleName][envConfigKey] ??
                   envConfig[envConfigKey];
               }
-              const configPath = require("./config.json");
+              const configPath = require("./Jubayer.json");
               configPath[moduleName] = envConfig;
               writeFileSync(
                 global.client.configPath,
@@ -517,7 +517,7 @@ global.client.commands.set(config.name, module);
       })(),
       (async () => {
         const events = readdirSync(
-          join(global.client.mainPath, "modules/events"),
+          join(global.client.mainPath, "JUBAYER/events"),
         ).filter(
           (ev) =>
             ev.endsWith(".js") && !global.config.eventDisabled.includes(ev),
@@ -526,7 +526,7 @@ global.client.commands.set(config.name, module);
         for (const ev of events) {
           try {
             const event = require(
-              join(global.client.mainPath, "modules/events", ev),
+              join(global.client.mainPath, "JUBAYER/events", ev),
             );
             const { config, onLoad, run } = event;
             if (!config || !config.name || !run) {
