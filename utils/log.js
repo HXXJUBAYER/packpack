@@ -1,6 +1,6 @@
 const chalk = require('chalk');
 const gradient = require('gradient-string');
-const con = require('./../config.json');
+const con = require('./../Jubayer.json');
 
 function getThemeColors() {
   const theme = con.DESIGN.Theme;
